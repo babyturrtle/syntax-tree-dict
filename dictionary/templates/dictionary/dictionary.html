@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}Dictionary{% endblock %}</h1>
+{% endblock %}
+
+{% block buttons %}
+    <ul>
+        <li><a href="{{ url_for('dict.upload_file') }}" class="button">Upload file</a></li>
+        <li>
+            <div class="popup" onclick="myFunction()">Help
+                <span class="popuptext" id="myPopup">
+                    <h3>Dictionary for syntax trees - Help</h3>
+                    <p>This dictionary can store a list of texts in alphabetical order which contain syntax trees of their sentences.<br>
+                        The user can upload a file to add new texts to the dictionary.</p>
+                    <p>Before adding new texts or editing the database the user is prompted to register or log in the system.<br>
+                        To do that click the <b>"Register"</b> button to create a new user or the <b>"Log In"</b> button to
+                        if the user information already exists in the system.</p>
+                    <p>To view a text and its list of sentences and their syntax trees <b>click on the word</b>.</p>
+                </span>
+            </div>
+            <script src="../../static/popup.js"></script>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <ul class="word">
+        {% for text in texts %}
+            <li><a href="{{ url_for('dict.view_text', text_id=text['id']) }}" class="link">{{ text['name'] }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

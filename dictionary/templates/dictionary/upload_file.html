@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+<script src="../../static/popup.js"></script>
+
+{% block header %}
+    <h1>{% block title %}Upload text file{% endblock %}</h1>
+{% endblock %}
+
+{% block buttons %}
+    <ul>
+        <li><a href="{{ url_for("dict.index") }}" class="button">View Dictionary</a></li>
+        <li>
+            <div class="popup" onclick="myFunction()">Help
+                <span class="popuptext" id="myPopup">
+                    <h3>Add text file - Help</h3>
+                    <p>This is a page that allows the user to upload a text file to add a new text and sentences to the
+                        dictionary.<br>
+                    </p>
+                    <p>To do that, input a name of the text into the textarea below and upload
+                        a file with <b>rtf</b> extension and click on the <b>"Upload file"</b> button.</p>
+                    <p>To go back to the main dictionary page with the list of all the texts,
+                        click on the <b>"View dictionary"</b> button.</p>
+                    <p>You can also get to the main dictionary page by <b>clicking the header on top</b> of the page.</p>
+                </span>
+            </div>
+            <script src="../../static/popup.js"></script>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <form class="main" method="post" style="display: flex; flex-direction: column;" enctype=multipart/form-data>
+        <label for="text">Text name</label>
+        <textarea name="text" id="text">{{ request.form['text'] }}</textarea>
+        <label for="file">Text file</label>
+        <input type="file" name="file">
+        <input type="submit" value="Upload file" style="width: 15%">
+    </form>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>{% block title %}{{ text['name'] }}{% endblock %}</h1>
+{% endblock %}
+
+{% block buttons %}
+    <ul>
+        <li><a href="{{ url_for("dict.index") }}" class="button">View Dictionary</a></li>
+        <li><button id="downloadBtn" class="button" onclick="getPdf()">Print</button></li>
+        <li>
+            <div class="popup" onclick="myFunction()">Help
+                <span class="popuptext" id="myPopup">
+                    <h3>Syntax trees - Help</h3>
+                    <p>This is a page that relates to a particular text in the dictionary.<br>
+                        It contains a list of sentences and their syntax trees.<br>
+                    </p>
+                    <p>To go back to the main dictionary page with the list of all the words,
+                        click on the <b>"View dictionary"</b> button.</p>
+                    <p>You can also get to the main dictionary page by <b>clicking the header on top</b> of the page.</p>
+                    <p>To print this page, click on the <b>"Print"</b> button.</p>
+                </span>
+            </div>
+            <script src="../../static/popup.js"></script>
+        </li>
+    </ul>
+{% endblock %}
+
+{% block content %}
+    <div class="phrase" style="padding-top: 30px; padding-left: 45px; padding-right: 45px;">{{ text["body"] }}</div>
+
+    <ul class="sentence">
+        {% for sentence in sentences %}
+            <li style="padding-top: 10px;">{{ sentence['name'] }}</li>
+                <ul>
+                    <li class="phrase">{{ sentence['tree'] }}</li>
+                </ul>
+        {% endfor %}
+    </ul>
+{% endblock %}
